@@ -958,12 +958,17 @@
     </main>
     <script>
         // JavaScript для интерактивного оглавления и прокрутки
-        document.addEventListener('DOMContentLoaded', function() {
+                document.addEventListener('DOMContentLoaded', function() {
             const tocLinks = document.querySelectorAll('.toc-link');
             const sections = document.querySelectorAll('section');
             const progressBar = document.getElementById('progress-bar');
             
+            // Флаг для предотвращения конфликтов прокрутки
+            let isScrolling = false;
+            
             function updateActiveLink() {
+                if (isScrolling) return;
+                
                 let currentSection = '';
                 const scrollPosition = window.scrollY + 150;
                 
@@ -980,14 +985,6 @@
                     link.classList.remove('active');
                     if (link.getAttribute('href') === `#${currentSection}`) {
                         link.classList.add('active');
-                        
-                        const toc = document.getElementById('toc');
-                        const linkRect = link.getBoundingClientRect();
-                        const tocRect = toc.getBoundingClientRect();
-                        
-                        if (linkRect.bottom > tocRect.bottom || linkRect.top < tocRect.top) {
-                            link.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
                     }
                 });
                 
@@ -997,7 +994,18 @@
                 progressBar.style.width = `${scrollPercent}%`;
             }
             
-            window.addEventListener('scroll', updateActiveLink);
+            // Используем throttle для производительности
+            let ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        updateActiveLink();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+            
             updateActiveLink();
             
             tocLinks.forEach(link => {
@@ -1007,10 +1015,17 @@
                     const targetElement = document.querySelector(targetId);
                     
                     if (targetElement) {
+                        isScrolling = true;
+                        
                         window.scrollTo({
                             top: targetElement.offsetTop - 30,
                             behavior: 'smooth'
                         });
+                        
+                        // Сбрасываем флаг через небольшую задержку
+                        setTimeout(() => {
+                            isScrolling = false;
+                        }, 500);
                     }
                 });
             });
@@ -1023,6 +1038,7 @@
     </script>
 </body>
 </html>
+
 
 
 
