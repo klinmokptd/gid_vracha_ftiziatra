@@ -235,17 +235,57 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         @media print {
-            #toc, #progress-indicator, #print-pdf-btn, footer {
-                display: none !important;
-            }
-            #content {
-                margin-left: 0 !important;
-                padding: 20px !important;
-            }
-            body {
-                background-color: white;
-            }
-        }
+    /* Скрываем только служебные элементы */
+    #progress-indicator, #print-pdf-btn {
+        display: none !important;
+    }
+    
+    /* Оглавление - оставляем, но делаем компактным */
+    #toc {
+        position: relative;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        margin-bottom: 30px;
+        page-break-after: avoid;
+        background-color: #f8f9fa;
+        color: #333;
+        box-shadow: none;
+    }
+    
+    #toc h2 {
+        color: #2c3e50;
+        border-bottom-color: #3498db;
+    }
+    
+    #toc a {
+        color: #2980b9;
+        border-left: none;
+        padding: 5px 10px;
+    }
+    
+    #toc ul ul {
+        margin-left: 20px;
+    }
+    
+    /* Контент - занимает всю ширину */
+    #content {
+        margin-left: 0 !important;
+        padding: 20px !important;
+        max-width: 100%;
+    }
+    
+    /* Подвал - печатаем */
+    footer {
+        display: block !important;
+        page-break-before: avoid;
+    }
+    
+    body {
+        background-color: white;
+        display: block;
+    }
+}
     </style>
 </head>
 <body>
@@ -983,6 +1023,7 @@
     </script>
 </body>
 </html>
+
 
 
 
