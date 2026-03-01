@@ -212,9 +212,44 @@
             margin-left: 15px;
             font-size: 0.9em;
         }
+        #print-pdf-btn {
+    position: fixed;
+    top: 15px;
+    right: 25px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 40px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    border: 2px solid white;
+}
+#print-pdf-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+@media print {
+    #toc, #progress-indicator, #print-pdf-btn, footer {
+        display: none !important;
+    }
+    #content {
+        margin-left: 0 !important;
+        padding: 20px !important;
+    }
+    body {
+        background-color: white;
+    }
+}
     </style>
 </head>
 <body>
+    <button id="print-pdf-btn" onclick="window.print()">🖨️ Распечатать / Сохранить PDF</button>
     <!-- Индикатор прогресса прокрутки -->
     <div id="progress-indicator">
         <div id="progress-bar"></div>
@@ -948,6 +983,7 @@
     </script>
 </body>
 </html>
+
 
 
 
