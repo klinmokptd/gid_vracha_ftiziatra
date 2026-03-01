@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Гид по работе врача-фтизиатра</title>
     <style>
-        * {
+                * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -213,104 +213,43 @@
             font-size: 0.9em;
         }
         #print-pdf-btn {
-    display: inline-block;
-    margin: 20px 0 30px 0;
-    padding: 10px 20px;
-    background-color: #f8f9fa;
-    color: #2c3e50;
-    border: 1px solid #3498db;
-    border-radius: 6px;
-    font-size: 0.95em;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: none;
-    font-weight: normal;
-}
-#print-pdf-btn:hover {
-    background-color: #e9ecef;
-    border-color: #2980b9;
-}
-@media print {
-    /* Скрываем только служебные элементы */
-    #progress-indicator, #print-pdf-btn {
-        display: none !important;
-    }
-    
-    /* Оглавление - делаем его компактным и печатаемым */
-    #toc {
-        position: relative;
-        width: 100%;
-        height: auto;
-        max-height: none;
-        margin-bottom: 30px;
-        page-break-after: avoid;
-        background-color: #f8f9fa;
-        color: #333;
-        box-shadow: none;
-    }
-    
-    #toc h2 {
-        color: #2c3e50;
-        border-bottom-color: #3498db;
-    }
-    
-    #toc a {
-        color: #2980b9;
-        border-left: none;
-        padding: 5px 10px;
-    }
-    
-    #toc a:hover {
-        background-color: transparent;
-        padding-left: 10px;
-    }
-    
-    #toc ul ul {
-        margin-left: 20px;
-    }
-    
-    /* Контент - занимает всю ширину */
-    #content {
-        margin-left: 0 !important;
-        padding: 20px !important;
-        max-width: 100%;
-    }
-    
-    /* Подвал - печатаем */
-    footer {
-        display: block !important;
-        page-break-before: avoid;
-        color: #7f8c8d !important;
-        border-top: 1px solid #ddd !important;
-    }
-    
-    body {
-        background-color: white;
-        display: block;
-    }
-    
-    /* Сохраняем цвета ссылок и форматирование */
-    a {
-        color: #2980b9 !important;
-        text-decoration: underline !important;
-    }
-    
-    .link-star {
-        color: #e74c3c !important;
-    }
-    
-    /* Важные блоки сохраняют свой стиль */
-    .important, .note, .warning {
-        border-left-width: 5px !important;
-        background-color: #f8f9fa !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-}
+            position: fixed;
+            top: 15px;
+            right: 25px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.95em;
+            font-weight: 500;
+            cursor: pointer;
+            z-index: 200;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+            border: 1px solid #3498db;
+        }
+        #print-pdf-btn:hover {
+            background-color: #34495e;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        @media print {
+            #toc, #progress-indicator, #print-pdf-btn, footer {
+                display: none !important;
+            }
+            #content {
+                margin-left: 0 !important;
+                padding: 20px !important;
+            }
+            body {
+                background-color: white;
+            }
+        }
     </style>
 </head>
 <body>
-    <button id="print-pdf-btn" onclick="window.print()">📄 Сохранить как PDF</button>
+        <button id="print-pdf-btn" onclick="window.print()">📄 Сохранить PDF</button>
     <!-- Индикатор прогресса прокрутки -->
     <div id="progress-indicator">
         <div id="progress-bar"></div>
@@ -1044,6 +983,7 @@
     </script>
 </body>
 </html>
+
 
 
 
